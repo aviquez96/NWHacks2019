@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navigation from "./Components/Navigation/Navigation";
@@ -10,45 +10,22 @@ import Chat from "./Components/Chat/Chat";
 import Home from "./Components/Home/Home";
 
 import * as ROUTES from "./Components/Constants/routes";
-import { withFirebase } from './Components/Firebase/index';
+import { withFirebase } from "./Components/Firebase/index";
+import { withAuthentication } from "./Components/Session/index";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => (
+  <Router>
+    <div>
+      <Navigation />
+      <hr />
+      <Route exact path={ROUTES.LANDING} component={Landing} />
+      <Route path={ROUTES.SIGNUP} component={SignUp} />
+      <Route path={ROUTES.SIGNIN} component={SignIn} />
+      <Route path={ROUTES.CHATROOM} component={Chatroom} />
+      <Route path={ROUTES.CHAT} component={Chat} />
+      <Route path={ROUTES.HOME} component={Home} />
+    </div>
+  </Router>
+);
 
-    this.state = {
-      authUser: null
-    };
-  }
-
-  componentDidMount() {
-    this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ? this.setState({ authUser })
-        : this.setState({ authUser: null });
-    });
-  }
-
-  componentWillUnmount() {
-    this.listener();
-  }
-
-  render() {
-    return (
-      <Router>
-        <div>
-          <Navigation authUser={this.state.authUser} />
-          <hr />
-          <Route exact path={ROUTES.LANDING} component={Landing} />
-          <Route path={ROUTES.SIGNUP} component={SignUp} />
-          <Route path={ROUTES.SIGNIN} component={SignIn} />
-          <Route path={ROUTES.CHATROOM} component={Chatroom} />
-          <Route path={ROUTES.CHAT} component={Chat} />
-          <Route path={ROUTES.HOME} component={Home} />
-        </div>
-      </Router>
-    );
-  }
-}
-
-export default withFirebase(App);
+export default withAuthentication(App);
