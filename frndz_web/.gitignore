@@ -24,4 +24,4 @@ yarn-error.log*
 
 
 # Files
-.src/Constants/firebase.js
+./src/Constants/firebase.js
