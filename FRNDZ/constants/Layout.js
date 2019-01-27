@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-const API_KEY = '';
+const API_KEY = 'TEST';
 export default {
   window: {
     width,

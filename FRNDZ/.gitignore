@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-constants/Layout
+
 # Xcode
 #
 build/
@@ -32,6 +32,7 @@ local.properties
 
 # node.js
 #
+constants/
 node_modules/
 npm-debug.log
 yarn-error.log
@@ -54,3 +55,4 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
