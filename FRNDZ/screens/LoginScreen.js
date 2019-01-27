@@ -58,12 +58,13 @@ renderButton(){
   }
   return (
     <View style= {styles.loginButton}>
-    <Button style={styles.buttonStyle} Pressed = {this.authenticate.bind(this)}>
+    <Button style={styles.buttonStyle}>
         Log in
       </Button>
       </View>
   );
 }
+//<Button style={styles.buttonStyle} Pressed = {this.authenticate.bind(this)}>
 
   render() {
     return (

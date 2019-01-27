@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, Image } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import {Header, Button, Spinner, Card, CardSection} from '../Components/Common';
 
 import HomeScreen from '../screens/HomeScreen';
@@ -82,7 +82,7 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator({
+export default createAppContainer(createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
@@ -91,4 +91,4 @@ export default createBottomTabNavigator({
   initialRouteName: 'LinksStack',
   tabBarOptions: {style: {backgroundColor: '#365C80', paddingTop:'2%'}},
 }
-);
+));

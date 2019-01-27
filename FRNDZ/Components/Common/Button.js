@@ -32,7 +32,7 @@ paddingBottom:10
     marginRight:5
   }
 };
-export {Button};
+export default Button;
 {
   /*
   export {Button: Button}; Key is equal to value so^^
