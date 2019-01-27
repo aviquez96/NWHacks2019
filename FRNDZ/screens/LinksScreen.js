@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {SafeAreaView, Text, View, TouchableOpacity,Image,Dimensions, TouchableHighlight } from 'react-native';
-import { Header,Input, Button, Spinner, Card, CardSection} from '../components/common';
+import { Header,Input, Button, Spinner, Card, CardSection} from '../Components/Common';
 import UploadScreen from './UploadScreen';
 
 export default class LinksScreen extends React.Component {
@@ -14,7 +14,7 @@ export default class LinksScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.loggedIncontainer}>
-        <Text> Hi <Text>
+        <Text> Hi </Text>
       </SafeAreaView>
     );
   }

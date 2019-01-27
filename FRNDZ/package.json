@@ -10,7 +10,9 @@
     "firebase": "^5.8.1",
     "react": "16.6.3",
     "react-native": "0.58.1",
-    "react-native-firebase": "^5.2.1"
+    "react-native-firebase": "^5.2.1",
+    "react-native-gesture-handler": "^1.0.15",
+    "react-navigation": "^3.0.9"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",

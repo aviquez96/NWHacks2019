@@ -1,10 +1,8 @@
 import React from 'react';
 import { Platform, Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import {Header, Button, Spinner, Card, CardSection} from '../components/common';
+import {Header, Button, Spinner, Card, CardSection} from '../Components/Common';
 
-
-import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
