@@ -26,4 +26,4 @@ const styles={
     alignSelf: 'stretch'
   }
 };
-export {Card};
+export default Card;

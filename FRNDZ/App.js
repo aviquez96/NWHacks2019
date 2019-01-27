@@ -16,8 +16,7 @@ import AppNavigator from './navigation/AppNavigator';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   state = {loggedIn: false,}
   renderContent(){
     switch (this.state.loggedIn) {
@@ -39,8 +38,7 @@ export default class App extends Component<Props> {
   render()  {
     return (
       <View style= {styles.container}>
-        <Header headText= 'Authentication' />
-        {this.renderContent()}
+        <AppNavigator />
       </View>
     );
   }
