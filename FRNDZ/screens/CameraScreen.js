@@ -14,7 +14,7 @@ export default class CameraScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.loggedIncontainer}>
-        <Text> Hi <Text>
+        <Text> Hi </Text>
       </SafeAreaView>
     );
   }

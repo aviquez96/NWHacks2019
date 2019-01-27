@@ -18,7 +18,7 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 type Props = {};
 export default class App extends Component<Props> {
-
+  state = {loggedIn: false,}
   renderContent(){
     switch (this.state.loggedIn) {
       case true:
