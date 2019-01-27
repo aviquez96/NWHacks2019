@@ -13,13 +13,6 @@ import firebase from 'firebase';
 import {Header, Button, Spinner} from './Components/Common';
 import LoginForm from './Components/LoginForm'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 type Props = {};
 export default class App extends Component<Props> {
   state= { loggedIn:null};
@@ -62,7 +55,7 @@ export default class App extends Component<Props> {
   }
   render()  {
     return (
-      <View>
+      <View style= {styles.container}>
         <Header headText= 'Authentication' />
         {this.renderContent()}
       </View>
@@ -71,6 +64,11 @@ export default class App extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+  viewStyle: {
+    flexDirection: 'row',
+    position: 'relative',
+    flex:1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
