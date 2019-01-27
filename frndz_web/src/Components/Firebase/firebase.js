@@ -12,31 +12,25 @@ const config = {
 };
 
 class Firebase {
-  constructor() {
-    app.initializeApp(config);
-
-    this.auth = app.auth;
+    constructor() {
+      app.initializeApp(config);
+  
+      this.auth = app.auth();
+    }
+  
+    // *** Auth API ***
+    doCreateUserWithEmailAndPassword = (email, password) =>
+      this.auth.createUserWithEmailAndPassword(email, password);
+  
+    doSignInWithEmailAndPassword = (email, password) =>
+      this.auth.signInWithEmailAndPassword(email, password);
+  
+    doSignOut = () => this.auth.signOut();
+  
+    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+  
+    doPasswordUpdate = password =>
+      this.auth.currentUser.updatePassword(password);
   }
-
-  // *** Auth API ***
-  //   SignUp
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
-
-  //   SignIn
-  doSignInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password);
-
-  //   SignOut
-  doSignOut = () => this.auth.signOut();
-
-//   //TODO
-//   //Reset Password
-//   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-
-//   //Update Password
-//   doPasswordUpdate = password =>
-//     this.auth.currentUser.updatePassword(password);
-}
-
-export default Firebase;
+  
+  export default Firebase;

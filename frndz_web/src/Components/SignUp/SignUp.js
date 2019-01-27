@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 
+import { withFirebase } from '../Firebase';
 import * as ROUTES from "../Constants/routes";
 
 const SignUp = () => (
@@ -11,14 +13,14 @@ const SignUp = () => (
 );
 
 const INITIAL_STATE = {
-  username: "",
-  email: "",
-  passwordOne: "",
-  passwordTwo: "",
-  error: null
+  username: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  error: null,
 };
 
-class SignUpForm extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
 
@@ -27,28 +29,39 @@ class SignUpForm extends Component {
 
   onSubmit = event => {
     const { username, email, passwordOne } = this.state;
+
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
-        this.setState({ error });
+        this.setState({ error });  
       });
+
     event.preventDefault();
-  };
+  }
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const {
+      username,
+      email,
+      passwordOne,
+      passwordTwo,
+      error,
+    } = this.state;
+
     const isInvalid =
       passwordOne !== passwordTwo ||
-      passwordOne === "" ||
-      email === "" ||
-      username === "";
+      passwordOne === '' ||
+      email === '' ||
+      username === '';
+
     return (
       <form onSubmit={this.onSubmit}>
         <input
@@ -82,7 +95,6 @@ class SignUpForm extends Component {
         <button disabled={isInvalid} type="submit">
           Sign Up
         </button>
-
         {error && <p>{error.message}</p>}
       </form>
     );
@@ -96,5 +108,10 @@ const SignUpLink = () => (
 );
 
 export default SignUp;
+
+const SignUpForm = compose(
+  withRouter,
+  withFirebase,
+)(SignUpFormBase);
 
 export { SignUpForm, SignUpLink };
