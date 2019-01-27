@@ -4,15 +4,15 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Navigation from './Navigation/Navigation';
-import Landing from './Components/Landing';
-import SignUp from './Components/SignUp';
-import SignIn from './Components/SignIn';
-import Chatroom from './Components/Chatroom';
-import Chat from './Components/Chat';
-import Home from './Components/Home';
+import Navigation from './Components/Navigation/Navigation';
+import Landing from './Components/Landing/Landing';
+import SignUp from './Components/SignUp/SignUp';
+import SignIn from './Components/SignIn/SignIn';
+import Chatroom from './Components/Chatroom/Chatroom';
+import Chat from './Components/Chat/Chat';
+import Home from './Components/Home/Home';
 
-import * as ROUTES from './Constants/routes';
+import * as ROUTES from './Components/Constants/routes';
 
 const App = () => (
   <Router>
