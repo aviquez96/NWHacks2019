@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {SafeAreaView,View, Text,AsyncStorage,TouchableOpacity, Image, Switch, KeyboardAvoidingView} from 'react-native';
 import {Button,Card, CardSection,InputVertical, Spinner,Header} from '../Components/Common';
 import firebase from 'firebase';
+import * as constants from '../constants/Constants';
 
 export default class LoginScreen extends React.Component{
 
@@ -14,12 +15,12 @@ export default class LoginScreen extends React.Component{
 
     componentWillMount(){
       firebase.initializeApp({
-        apiKey: 'AIzaSyADyu6HKZT3LK5lHX-cXAaQaxVaSG4XFk0',
-        authDomain: "auth-06.firebaseapp.com",
-        databaseURL: "https://auth-06.firebaseio.com",
-        projectId: "auth-06",
-        storageBucket: "auth-06.appspot.com",
-        messagingSenderId: "151275976346"
+        apiKey: constants.API_KEY,
+        authDomain: constants.AUTH_DOMAIN,
+        databaseURL: constants.DATABASE_URL,
+        projectId: constants.PROJECT_ID,
+        storageBucket: constants.STORAGE_BUCKET,
+        messagingSenderId: constants.MESSAGING_SENDER_ID
       });
       firebase.auth().onAuthStateChanged((user) => {
         if(user) {
