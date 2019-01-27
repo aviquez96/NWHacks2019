@@ -12,30 +12,13 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import firebase from 'firebase';
 import {Header, Button, Spinner} from './Components/Common';
 import LoginForm from './Components/LoginForm'
+import AppNavigator from './navigation/AppNavigator';
+import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
+
 
 type Props = {};
 export default class App extends Component<Props> {
-  state= { loggedIn:null};
 
-    componentWillMount(){
-      firebase.initializeApp({
-        apiKey: 'AIzaSyADyu6HKZT3LK5lHX-cXAaQaxVaSG4XFk0',
-        authDomain: "auth-06.firebaseapp.com",
-        databaseURL: "https://auth-06.firebaseio.com",
-        projectId: "auth-06",
-        storageBucket: "auth-06.appspot.com",
-        messagingSenderId: "151275976346"
-      });
-      firebase.auth().onAuthStateChanged((user) => {
-        if(user) {
-          this.setState({loggedIn:true});
-        }
-        else {
-          this.setState({loggedIn:false});
-        }
-      });
-
-    }
   renderContent(){
     switch (this.state.loggedIn) {
       case true:

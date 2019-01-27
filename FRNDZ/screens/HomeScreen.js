@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {SafeAreaView, Text, View, TouchableOpacity,Image,Dimensions, TouchableHighlight } from 'react-native';
-import { Header,Input, Button, Spinner, Card, CardSection} from '../components/common';
+import { Header,Input, Button, Spinner, Card, CardSection} from '../Components/Common';
 import UploadScreen from './UploadScreen';
 
 export default class HomeScreen extends React.Component {

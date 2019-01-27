@@ -2,21 +2,39 @@
 // to server with username and password as parameters.
 import React, {Component} from 'react';
 import {SafeAreaView,View, Text,AsyncStorage,TouchableOpacity, Image, Switch, KeyboardAvoidingView} from 'react-native';
-import {Button,Card, CardSection,InputVertical, Spinner,Header} from '../components/common';
-
-var XMLParser = require('react-xml-parser');
-
-// PHP authenticate
-//const serverURL = "https://app.ledgerdocs.com/index.php/iphone/";
-const serverURL = "https://migration.ledgersonline.com/index.php/Iphone/";
-import FormData from 'FormData';
+import {Button,Card, CardSection,InputVertical, Spinner,Header} from '../Components/Common';
+import firebase from 'firebase';
 
 export default class LoginScreen extends React.Component{
+
+  //Firebase
+
+  state = { email: '', password: '', error: '', loading: false,
+  loggedIn: 'false', secure: true, remember: false};
+
+    componentWillMount(){
+      firebase.initializeApp({
+        apiKey: 'AIzaSyADyu6HKZT3LK5lHX-cXAaQaxVaSG4XFk0',
+        authDomain: "auth-06.firebaseapp.com",
+        databaseURL: "https://auth-06.firebaseio.com",
+        projectId: "auth-06",
+        storageBucket: "auth-06.appspot.com",
+        messagingSenderId: "151275976346"
+      });
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user) {
+          this.setState({loggedIn:true});
+        }
+        else {
+          this.setState({loggedIn:false});
+        }
+      });
+
+    }
+
   static navigationOptions = {
     header: null
   };
-  state = { email: '', password: '', error: '', loading: false,
-  loggedIn: 'false', secure: true, remember: false};
 
   constructor(props){
     super(props);
@@ -33,70 +51,7 @@ export default class LoginScreen extends React.Component{
     });
 }
   };
-//PHP Authentication
 
-authenticate(){
-  this.setState({error: '', loading: true});
-  const data = new FormData();
-  data.append("user_name",  this.state.email);
-  data.append("password",  this.state.password);
-  fetch(serverURL+'authenticate_React', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: data
-  }).then((response) => response.text())
-  .then((responseXML) => {
-    // Showing response message coming from server.
-    var xml = new XMLParser().parseFromString(responseXML);    // Assume xmlText contains the example XML
-    if(xml.getElementsByTagName('String')[0].value == "success"){
-      this.onLoginSuccess();
-    }
-    else{
-      this.onLoginFail();
-    }
-
-  }).catch((error) => {
-    console.error(error);
-  });
-}
-
-_signInAsync = async () => {
-  this.setState({
-    loggedIn: 'true',
-  },
-);
-let user = {
-  LoggedIn: this.state.loggedIn,
-  user_name:  this.state.email,
-  password:  this.state.password,
-  remember: this.state.remember
-}
-
-  await AsyncStorage.setItem('User', JSON.stringify(user));
-
-   this.props.navigation.navigate('AuthLoading');
- };
-onLoginFail(){
-  this.setState({
-    error: 'Authentication Failed',
-    loading: false
-  });
-}
-onLoginSuccess(){
-  this._signInAsync();
-  this.setState({
-  error: '',
-  loading: false,
-  remember: false
-});
-}
-managePasswordVisibility = () =>
-  {
-    this.setState({ secure: !this.state.secure });
-  }
 renderButton(){
   if(this.state.loading){
     return <Spinner size= "small" /> ;

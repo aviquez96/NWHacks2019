@@ -2,7 +2,8 @@
 // settings can be implemented here.
 import React, { Component } from 'react';
 import { AsyncStorage,TouchableOpacity, View, Text, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
-import {Header, Button, Spinner} from '../components/common';
+import {Header, Button, Spinner} from '../Components/Common';
+import firebase from 'firebase';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -16,9 +17,9 @@ export default class SettingsScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.loggedIncontainer}>
-      <View style={styles.hb_container}>
-          <Text style={{ fontSize: 20, color: '#fff' }}> Settings  </Text>
-      </View>
+      <Button Pressed= {() => firebase.auth().signOut()}>
+        Log out
+      </Button>
       </SafeAreaView>
     );
   }
