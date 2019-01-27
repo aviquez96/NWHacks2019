@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
-import { SignUpLink } from '../SignUp';
+import { SignUpLink } from '../SignUp/SignUp';
 import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
+import * as ROUTES from '../Constants/routes';
 
-const SignInPage = () => (
+const SignIn = () => (
   <div>
     <h1>SignIn</h1>
     <SignInForm />
@@ -83,6 +83,6 @@ const SignInForm = compose(
   withFirebase,
 )(SignInFormBase);
 
-export default SignInPage;
+export default SignIn;
 
 export { SignInForm };
