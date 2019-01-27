@@ -9,6 +9,9 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import firebase from 'firebase';
+import {Header, Button, Spinner} from './Components/Common';
+import LoginForm from './Components/LoginForm'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,12 +22,49 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-  render() {
+  state= { loggedIn:null};
+
+    componentWillMount(){
+      firebase.initializeApp({
+        apiKey: 'AIzaSyADyu6HKZT3LK5lHX-cXAaQaxVaSG4XFk0',
+        authDomain: "auth-06.firebaseapp.com",
+        databaseURL: "https://auth-06.firebaseio.com",
+        projectId: "auth-06",
+        storageBucket: "auth-06.appspot.com",
+        messagingSenderId: "151275976346"
+      });
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user) {
+          this.setState({loggedIn:true});
+        }
+        else {
+          this.setState({loggedIn:false});
+        }
+      });
+
+    }
+  renderContent(){
+    switch (this.state.loggedIn) {
+      case true:
+      return (
+        <View style= {styles.viewStyle}>
+        <Button Pressed= {() => firebase.auth().signOut()}>
+          Log out
+        </Button>
+        </View>
+      );
+        break;
+      case false:
+        return <LoginForm />;
+      default:
+        return <Spinner size= 'large' />;
+    }
+  }
+  render()  {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>Hello World</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <View>
+        <Header headText= 'Authentication' />
+        {this.renderContent()}
       </View>
     );
   }
